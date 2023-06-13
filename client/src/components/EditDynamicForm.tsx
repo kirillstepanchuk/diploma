@@ -18,8 +18,6 @@ interface DynamicFormProps {
 }
 
 const EditDynamicForm: FC<DynamicFormProps> = ({values, categoryFields, onFieldChange }) => {
-  // console.log('values: ', values);
-
 
   return <>
     {

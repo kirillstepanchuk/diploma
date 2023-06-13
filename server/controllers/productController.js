@@ -53,8 +53,6 @@ class ProductControler {
       }
 
       const product = await productService.editProduct(id, productData);
-      console.log('product: ', product);
-
       return res.status(200).json({
         message: 'Товар успешно обновлен',
         data: {
@@ -96,7 +94,6 @@ class ProductControler {
           filters = { ...filters, ...additionalFields}
         }
       }
-      console.log('filters: ', filters);
 
       if (query.q) {
         filters['title'] = { "$regex": query.q, "$options": "i" }
@@ -141,7 +138,6 @@ class ProductControler {
   async getUserProducts(req, res, next) {
     try {
       const id = req.params.userId;
-      console.log('id: ', id);
       const products = await productService.getProducts({ author: id });
 
       return res.status(200).json(products);
@@ -188,7 +184,6 @@ class ProductControler {
     try {
       const userId = req.user.id;
       const productId = req.body.id;
-      console.log('productId: ', productId);
       const user = await productService.switchFavoriteProduct(userId, productId);
 
       return res.status(200).json(user);

@@ -7,7 +7,6 @@ export const fetchCreateProduct = async (productData: FormData) => {
 }
 
 export const fetchEditProduct = async (id: string, productData: FormData) => {
-  console.log('id: ', id);
   const response = await $api.put(`/product/${id}`, productData);
 
   return response.data;

@@ -81,7 +81,6 @@ const CategorySettingsModal: FC<CategorySettingsModalProps> = ({ onClose, currVa
         ...prev,
         values: prev.values.filter((val: any) => val.value !== key)
       }
-      console.log('newVal: ', newVal);
     
       return newVal;
     })

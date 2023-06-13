@@ -34,7 +34,6 @@ export function* authorizeUser(action: any): SagaIterator<void> {
     // yield call(setCookie, COOKIES.user, data.userId);
     // yield put(push(ROUTE_PAGES.main));
   } catch (e:any) {
-    console.log('e: ', e);
     const errorMessage = e.response?.data?.message || 'Неопознанная ошибка';
     yield call(action.payload.enqueueSnackbar, errorMessage, { variant: "error"});
     yield put(loginUserError(errorMessage));
@@ -53,30 +52,25 @@ export function* registerUser(action: any): SagaIterator<void> {
 export function* logoutUser(action: any): SagaIterator<void> {
   try {
     yield call(fetchLogout);
-    // yield call(deleteCookie, COOKIES.token);
-    yield call(deleteUserCookies)
-    console.log(1);
-    // yield put(push('/login'));
-    yield call(action.payload.navigate, '/login');
-
-    // history.push('/login')
-    // yield put(push(ROUTE_PAGES.checkEmail));
-  } catch (e: any) {
-    console.log('e: ', e);
     yield call(deleteUserCookies);
-    // yield put(signupUserError(e.response?.data?.message));
+    yield call(action.payload.navigate, '/login');
+  } catch (e: any) {
+    yield call(deleteUserCookies);
   }
-  // yield call(deleteUserCookies);
-  // yield put(push(ROUTE_PAGES.main));
 }
 
-export function* checkIsAuth(): SagaIterator<void> {
+export function* checkIsAuth(action: any): SagaIterator<void> {
   try {
-    const data: any = yield call(
-      fetchIsAuth
-    );
+    const data: any = yield call(fetchIsAuth);
+    console.log('data?.user: ', data?.user);
+    if (data?.user?.isBlocked) {
+      yield call(fetchLogout);
+      yield call(deleteUserCookies);
+      yield call(action.payload.navigate, '/login');
+
+      return;
+    }
     yield call(setCookie, COOKIES.token, data.accessToken);
-    // yield call(localStorage.setItem, 'token', data.accessToken);
     localStorage.setItem('token', data.accessToken)
     yield put(checkIsAuthSuccess());
     yield put(loginUserSuccess(data));

@@ -28,7 +28,6 @@ const UserProductTable: FC<UserProductTableProps> = ({ userId }) => {
     setLoading(true)
     // dispatch(getAdminProducts(1));
     $api.get(`/user-products/${userId}`).then((data) => {
-      console.log('data: ', data);
       setProducts(data.data);
       setLoading(false);
     }, () => {

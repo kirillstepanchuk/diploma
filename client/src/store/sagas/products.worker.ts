@@ -7,7 +7,6 @@ import { GetProductsActionTypes } from "../actionTypes";
 
 export function* getProducts(action: any): SagaIterator<void> {
   try {
-    console.log('action: ', action);
     const data: any = yield call(fetchProducts, action.payload);
 
     yield put(getProductsSuccess(data));

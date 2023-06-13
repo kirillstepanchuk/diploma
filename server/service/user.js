@@ -34,7 +34,6 @@ class UserService {
 
   async activate(activationLink) {
     const user = await UserModel.findOne({ activationLink });
-    console.log('user: ', user);
     if (!user) {
       throw ApiError.BadRequest('Некорректная ссылка активации');
     }
@@ -54,6 +53,9 @@ class UserService {
     }
     if (!user.isActivated) {
       throw ApiError.BadRequest(`Для входа вам требуется подтвердить почту (проверьте почту ${user.email})`);
+    }
+    if (user.isBlocked) {
+      throw ApiError.BadRequest(`Данная учетная запись заблокирована`);
     }
     const userDto = new UserDto(user);
     const tokens = tokenService.generateTokens({...userDto});

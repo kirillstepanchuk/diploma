@@ -7,7 +7,6 @@ export const fetchProducts = async () => {
 }
 
 export const fetchApproveProduct = async (id: string) => {
-  console.log('id: ', id);
   const response = await $api.post(`/approve-product/${id}`);
 
   return response.data;

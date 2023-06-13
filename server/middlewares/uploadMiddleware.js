@@ -6,7 +6,6 @@ const storage = multer.diskStorage({
     cb(null, 'images/')
   },
   filename: (req, file, cb) => {
-    // console.log('file: ', file);
     const re = /(?:\.([^.]+))?$/;
     const ext = re.exec(file.originalname)[1]; 
     cb(null, `${uuid.v4()}.${ext}`)

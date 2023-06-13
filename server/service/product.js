@@ -41,12 +41,6 @@ class ProductService {
       {favoriteProducts: {$in:[id]}},
       {$pullAll: { favoriteProducts: [id],}}
     );
-    // console.log('users: ', users.length);
-    // for (let user in users) {
-    //   console.log('user.favoriteProduct: ', user.favoriteProducts);
-    //   user.favoriteProducts = user.favoriteProducts.filter((product) => product !== id)
-    //   await user.save();
-    // }
 
 
     await ProductModel.deleteOne({ _id: id });

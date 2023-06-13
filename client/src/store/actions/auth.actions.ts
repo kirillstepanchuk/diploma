@@ -43,6 +43,9 @@ export type LogoutActions = LogoutAction;
 // Check is auth
 export interface CheckIsAuthAction {
   type: CheckIsAuthActionTypes.CHECK_IS_AUTH,
+  payload: {
+    navigate: NavigateFunction,
+  }
 }
 interface CheckIsAuthSuccessAction {
   type: CheckIsAuthActionTypes.CHECK_IS_AUTH_SUCCESS,
@@ -116,8 +119,11 @@ export const getCurrentUserFailed = (error: string): GetCurrentUserFailedAction 
 });
 
 // Check is auth
-export const checkIsAuth = (): CheckIsAuthAction => ({
+export const checkIsAuth = (navigate: NavigateFunction): CheckIsAuthAction => ({
   type: CheckIsAuthActionTypes.CHECK_IS_AUTH,
+  payload: {
+    navigate,
+  }
 });
 export const checkIsAuthSuccess = (): CheckIsAuthSuccessAction => ({
   type: CheckIsAuthActionTypes.CHECK_IS_AUTH_SUCCESS,

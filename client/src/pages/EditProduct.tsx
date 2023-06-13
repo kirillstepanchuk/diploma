@@ -60,12 +60,6 @@ const EditProduct = () => {
   }
 
   const onFieldChange = (fieldName: string, value: string) => {
-    console.log('fieldName: ', fieldName);
-    console.log('value: ', value);
-    // setAdditionalFields({
-    //   ...additionalFields,
-    //   [fieldName]: value,
-    // })
     setAdditionalFields((prevState: any) => ({
       ...prevState,
       [fieldName]: value,
@@ -73,15 +67,9 @@ const EditProduct = () => {
   }
 
   useEffect(() => {
-    console.log("additionalFields", additionalFields);
-  }, [additionalFields])
-
-  useEffect(() => {
     $api.get(`/categories`).then((res) => {
       setFields(res.data);
-    }, (err) => {
-      console.log('err: ', err);
-    })
+    }, (err) => { })
   }, []);
 
   useEffect(() => {

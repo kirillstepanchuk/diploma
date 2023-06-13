@@ -25,7 +25,6 @@ export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const userState = useSelector(selectUserState);
-  console.log('userState: ', userState?.data?.user?.roles?.includes("ADMIN"));
   const favoriteProductsState = useSelector(selectFavoriteProductsState);
 
   const dispatch = useDispatch();

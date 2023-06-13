@@ -44,7 +44,6 @@ const CategorySettings = () => {
       setLoading(false);
 
     }, (err) => {
-      console.log('err: ', err);
       setLoading(false);
     })
   }, []);
@@ -101,10 +100,7 @@ const CategorySettings = () => {
         fields: catInfo.fields.map((field: any) => field.sysname === value.sysname ? value : field)
       }
       $api.put(`/categories/${catInfo._id}`, newInfo).then((res) => {
-        console.log('newInfo: ', newInfo);
-        console.log('categoryFields: ', categoryFields);
         setCategoryFields(newInfo.fields);
-        console.log(res.data);
       })
     }
   };
@@ -123,8 +119,6 @@ const CategorySettings = () => {
   const handleCloseAddCategoryModal = (value: any) => {
     if (value) {
       $api.post('/categories', { name: value}).then((res) => {
-        
-        console.log('res: ', res.data);
         setFields((prev) => prev ? [...prev, res.data] : [res.data]);
         setOpenAddCategoryModal(false);
         setCategory((prev) => res.data.sysname);

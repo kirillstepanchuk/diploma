@@ -18,10 +18,8 @@ export function* createProduct(action: any): SagaIterator<void> {
 }
 
 export function* editProduct(action: any): SagaIterator<void> {
-  console.log('action: ', action);
   try {
     const data: any = yield call(fetchEditProduct, action.payload.id, action.payload.data);
-    console.log('data: ', data);
 
     yield put(editProductSuccess(data));
     yield call(action.payload.navigate, `/product/${data.data.productId}`);

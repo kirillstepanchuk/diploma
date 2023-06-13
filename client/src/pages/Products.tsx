@@ -63,9 +63,7 @@ const Products = () => {
   useEffect(() => {
     $api.get(`/categories`).then((res) => {
       setFields(res.data);
-    }, (err) => {
-      console.log('err: ', err);
-    })
+    }, (err) => { })
   }, []);
 
 
@@ -160,8 +158,6 @@ const Products = () => {
   }, [categoryFields])
 
   const onFieldChange = (fieldName: string, value: string) => {
-    console.log('value: ', value);
-    console.log('fieldName: ', fieldName);
     setAdditionalFields({
       ...additionalFields,
       [fieldName]: value,

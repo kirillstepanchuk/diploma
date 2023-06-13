@@ -17,28 +17,10 @@ app.use(cookieParser());
 app.use('/api', routes);
 app.use(errorMiddleware)
 
-// app.post('/api/photo', uploadMiddleware.single('image'), function (req, res, next) {
-//   console.log('req: ', req.body);
-//   console.log('req: ', req.file);
-
-//   res.status(200).json({
-//     good: true,
-//   })
-//   // req.file is the `avatar` file
-//   // req.body will hold the text fields, if there were any
-// });
-
 app.get('/images/:imageName', (req, res) => {
-  // do a bunch of if statements to make sure the user is 
-  // authorized to view this image, then
 
   const imageName = req.params.imageName
 
-  // if (!imageName) {
-  //   const readStream = fs.createReadStream(`images/${imageName}`);
-  //   readStream.pipe(res);
-  //   return;
-  // }
   const readStream = fs.createReadStream(`images/${imageName}`)
   readStream.pipe(res)
 })

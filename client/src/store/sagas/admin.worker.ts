@@ -16,7 +16,6 @@ export function* getAdminProducts(action: any): SagaIterator<void> {
 }
 
 export function* approveProduct(action: any): SagaIterator<void> {
-  console.log('action: ', action);
   try {
     const data: any = yield call(fetchApproveProduct, action.payload.id);
 
@@ -28,7 +27,6 @@ export function* approveProduct(action: any): SagaIterator<void> {
 }
 
 export function* deleteProduct(action: any): SagaIterator<void> {
-  console.log('action: ', action);
   try {
     const data: any = yield call(fetchDeleteProduct, action.payload.id);
 

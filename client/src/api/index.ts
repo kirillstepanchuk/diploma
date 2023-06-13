@@ -27,7 +27,6 @@ $api.interceptors.response.use(
       originalRequest._isRetry = true;
       try {
         const data = await fetchIsAuth();
-        console.log('data: ', data);
         setCookie(COOKIES.token, data.accessToken);
         localStorage.setItem('token', data.accessToken);
         store.dispatch(loginUserSuccess(data));
