@@ -43,11 +43,14 @@ class ProductService {
     );
 
 
-    await ProductModel.deleteOne({ _id: id });
+    const product = await ProductModel.findOneAndDelete({ _id: id });
 
     const user = await UserModel.findById(userId);
 
-    return user;
+    return {
+      user,
+      product,
+    };
   }
 
   async switchFavoriteProduct(userId, productId) {

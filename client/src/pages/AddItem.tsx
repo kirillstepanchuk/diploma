@@ -199,6 +199,7 @@ const AddItem = () => {
           </Grid>
           <Grid item xs={12}>
             <CurrencyTextField
+              minimumValue={"0"}
               label="Цена"
               variant="outlined"
               value={price}

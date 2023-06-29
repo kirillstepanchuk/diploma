@@ -1,5 +1,6 @@
 const productService = require('../service/product');
 const userService = require('../service/user');
+const fs = require('fs');
 
 function isObjEmpty (obj) {
   return Object.keys(obj).length === 0;
@@ -172,9 +173,20 @@ class ProductControler {
     try {
       const id = req.params.id;
       const userId = req.user.id;
-      const products = await productService.deleteProduct(id, userId);
+      const data = await productService.deleteProduct(id, userId);
+      console.log('product: ', data);
 
-      return res.status(200).json(products);
+      if (data?.product?.imageFileName) {
+        
+        await fs.unlink(`${__basedir}/images/${data.product.imageFileName}`, (err) => {
+          if (err) {
+            console.error(err)
+            return
+          }
+        })
+      }
+
+      return res.status(200).json(data.user);
     } catch (error) {
       next(error);
     }

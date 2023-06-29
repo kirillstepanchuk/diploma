@@ -110,10 +110,6 @@ const EditProduct = () => {
   const onSubmit = async (evt: any) => {
     evt.preventDefault();
 
-    if (!image) {
-      return enqueueSnackbar('Загрузите изображение товара.', {variant: "error"});
-    }
-
     if (!title) {
       return enqueueSnackbar('Заполните поле названия товара.', {variant: "error"});
     }
@@ -212,6 +208,7 @@ const EditProduct = () => {
           </Grid>
           <Grid item xs={12}>
             <CurrencyTextField
+              minimumValue={"0"}
               label="Цена"
               variant="outlined"
               value={price}

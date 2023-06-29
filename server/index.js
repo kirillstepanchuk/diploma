@@ -10,6 +10,8 @@ const errorMiddleware = require('./middlewares/errorMiddleware');
 const uploadMiddleware = require('./middlewares/uploadMiddleware');
 const routes = require('./routes/routes');
 
+global.__basedir = __dirname;
+
 const app = express();
 app.use(cors({credentials: true, origin: true,}))
 app.use(express.json());
